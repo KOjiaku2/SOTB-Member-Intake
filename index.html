@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>She Owns the Block — Member Intake Questionnaire</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #B8860B;
+    --gold-light: #F5EDD0;
+    --gold-mid: #D4A832;
+    --black: #0F0F0F;
+    --off-white: #FAF9F6;
+    --text: #1A1A1A;
+    --muted: #5A5A5A;
+    --border: #D6D2C8;
+    --error: #A32D2D;
+    --radius: 6px;
+  }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--off-white);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .header {
+    background: var(--black);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .header .eyebrow {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-mid);
+    margin-bottom: 1rem;
+  }
+  .header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: normal;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold-mid);
+  }
+  .header p {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    color: #B0ADA6;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .form-wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .section-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.5rem 0 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .question-block {
+    margin-bottom: 2rem;
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
+  .question-block.scenario {
+    border-left: 3px solid var(--gold);
+  }
+
+  .question-number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-weight: normal;
+  }
+
+  .scenario-box {
+    background: var(--gold-light);
+    border-radius: 4px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #3A300A;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+    background: var(--off-white);
+  }
+  .option-label:hover {
+    border-color: var(--gold);
+    background: var(--gold-light);
+  }
+  .option-label input[type="radio"],
+  .option-label input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--gold);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+
+  /* Text inputs */
+  .text-field {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--off-white);
+    margin-top: 0.4rem;
+  }
+  .text-field:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+
+  label.field-label {
+    display: block;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .field-group { margin-bottom: 1.1rem; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 520px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Submit */
+  .submit-area {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+  .submit-btn {
+    background: var(--black);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.9rem 2.8rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: #2A2A2A; }
+
+  .disclaimer {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .required-star { color: var(--error); margin-left: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p class="eyebrow">Member Intake</p>
+  <h1>She Owns the Block<br /><em>Investment Club Readiness Questionnaire</em></h1>
+  <p>Before joining an investment collective, it helps to understand your relationship with money, risk, and collaboration. Answer honestly — there are no wrong responses, only ones that point you in the right direction.</p>
+</div>
+
+<div class="form-wrap">
+
+<!-- ============================================================
+     REPLACE THE ACTION URL BELOW WITH YOUR FORMSPREE ENDPOINT
+     Example: action="https://formspree.io/f/xyzabcde"
+     ============================================================ -->
+<form action="https://formspree.io/f/xjgqgvor" method="POST">
+
+  <!-- Hidden field so Formspree knows where to redirect after submit -->
+  <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you" />
+
+  <!-- ── Contact Info ─────────────────────────────────── -->
+  <p class="section-label">Your information</p>
+
+  <div class="two-col">
+    <div class="field-group">
+      <label class="field-label" for="first_name">First name <span class="required-star">*</span></label>
+      <input class="text-field" type="text" id="first_name" name="first_name" required placeholder="Jane" />
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="last_name">Last name <span class="required-star">*</span></label>
+      <input class="text-field" type="text" id="last_name" name="last_name" required placeholder="Smith" />
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label" for="email">Email address <span class="required-star">*</span></label>
+    <input class="text-field" type="email" id="email" name="email" required placeholder="jane@example.com" />
+  </div>
+
+  <!-- ── Q1 ─────────────────────────────────── -->
+  <p class="section-label">Investment orientation</p>
+
+  <div class="question-block">
+    <p class="question-number">Question 01</p>
+    <p class="question-text">What would a successful investment project look like to you?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q1" value="On time, within budget, above-contribution profit with full documentation" required />
+        The project delivers on time, within the agreed budget, and returns a profit above what each member contributed — with clear documentation of every financial decision made along the way.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q1" value="Recover principal and generate meaningful return, even if timeline extended" />
+        The club recovers every member's principal and generates a meaningful return — even if the timeline extended or required difficult decisions mid-project. Outcome matters more than a smooth process.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q1" value="Group navigated with integrity, transparency, and trust to invest again at a higher level" />
+        The group navigated the investment together with integrity — members honored their commitments, decisions were made transparently, and the experience built the trust and knowledge to invest again at a higher level.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q2 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 02</p>
+    <p class="question-text">What is your primary investment orientation?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q2" value="Long-term wealth building, no guarantees, stay the course" required />
+        I am committed to building long-term wealth through consistent investing — I understand there are no guarantees of profit and I am prepared to stay the course.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q2" value="Faster returns within a short window, higher risk acceptable" />
+        I am looking for faster returns — I prefer opportunities that pay out within a short window, even if they carry more risk.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q2" value="Still figuring out my approach, need more information" />
+        I am still figuring out my approach — I need more information before I can commit to a direction.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q3 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 03</p>
+    <p class="question-text">How would you describe the money you are considering investing?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q3" value="True disposable income, comfortable without it for 24-30 months" required />
+        It is true disposable income — I can comfortably do without it for the next 24 to 30 months with no impact on my daily life or financial obligations.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q3" value="Manageable without for now, but uncomfortable if lost entirely" />
+        It is money I can manage without for now, but I would be uncomfortable if it were lost entirely — I need to know my capital is protected.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q3" value="May need within 1-2 years, cannot commit to long hold period" />
+        It is money I may need within the next one to two years — I cannot commit to a long hold period.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q4 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 04</p>
+    <p class="question-text">Which contribution approach do you prefer?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q4" value="Identify opportunity first, define contributions to reach required amount" required />
+        Identify the investment opportunity first, then define what each member's contribution must be to reach the required amount within a set timeframe.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q4" value="Fixed monthly contributions into shared fund, invest once capital accumulated" />
+        Begin contributing a fixed monthly amount into a shared fund — invest once enough capital has been accumulated.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q4" value="No strong preference, follow group structure" />
+        I do not have a strong preference — I would follow whatever structure the group agrees on.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q5 Scenario ─────────────────────────────────── -->
+  <p class="section-label">Scenario-based judgment</p>
+
+  <div class="question-block scenario">
+    <p class="question-number">Question 05 — Scenario</p>
+    <div class="scenario-box">
+      She Owns the Block syndicate invests $300,000 in a development deal. Each participating member's share is $25,000. At the 18-month mark, 75% of the contract price — $225,000 — has already been paid to the developer. The developer now requests an additional 20% above the original contract price, plus 9 more months to deliver the units. If a member chooses to withdraw at this stage, they would only recover a portion of what they contributed — and the value of that money has already been reduced by 18 months of inflation, lost investment returns, and the cost of exiting a partially completed deal.
+    </div>
+    <p class="question-text">Knowing this, how do you respond?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q5" value="Require independent cost audit, justification, and revised schedule with penalties before club votes" required />
+        Authorize neither request until the developer provides an independent cost audit, documented justification for the increase, and a revised delivery schedule with financial penalty clauses for any further delays — then the club votes.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q5" value="Approve both requests — finishing the deal is the stronger financial position given 75% already paid" />
+        Approve both requests. With 75% of the contract already paid, withdrawing now would mean recovering less than what was contributed — while the money has also lost value sitting in a stalled project for 18 months. Finishing the deal is the stronger financial position.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q5" value="Exit and pursue repayment after calculating true cost of withdrawal" />
+        Exit and pursue repayment — but only after calculating the true cost of withdrawal: the partial recovery of each member's $25,000, 18 months of lost investment returns, inflation erosion, and any penalties tied to early exit from the contract.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q6 ─────────────────────────────────── -->
+  <p class="section-label">Collaboration and governance</p>
+
+  <div class="question-block">
+    <p class="question-number">Question 06</p>
+    <p class="question-text">Do you work well in team environments where decisions are made collectively, even when the outcome differs from your personal preference?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q6" value="Yes — comfortable deferring to the group when needed" required />
+        Yes — I understand that collective investing requires shared decision-making and I am comfortable deferring to the group when needed.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q6" value="Mostly — but want major decisions above a threshold to require unanimous agreement" />
+        Mostly — I work well in teams but I would want major financial decisions above a certain threshold to require unanimous agreement.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q6" value="Prefer final say over decisions affecting my money — collaborative structures are a stretch" />
+        I prefer to have final say over decisions that affect my money — collaborative structures are a stretch for me.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q7 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 07</p>
+    <p class="question-text">What does participation in an investment club reveal about its members over time?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q7" value="Financial discipline and money management only — character is separate" required />
+        Financial discipline and money management alone — personal character is a separate matter.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q7" value="All of the above — integrity, risk tolerance, discipline, communication, commitment under pressure" />
+        All of the above — integrity, risk tolerance, money discipline, communication style, how people handle disagreement, whether they honor commitments under pressure, and the gap between what someone says they will do and what they actually do when money is involved.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q7" value="It depends — some investments surface character, others do not" />
+        It depends on the situation — some investments surface character, others do not.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q8 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 08</p>
+    <p class="question-text">What should happen if a member consistently misses their agreed contribution with no prior communication or documented hardship?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q8" value="Formal notice, grace period, then reduce ownership stake proportionally to actual contributions" required />
+        Issue a formal notice and allow a defined grace period — then reduce their ownership stake proportionally to what they have actually contributed.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q8" value="Ask member to exit and return contributions without interest or appreciation" />
+        Ask the member to exit and return their contributions — without interest or appreciation.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q8" value="Club carries them temporarily, recovers shortfall from their share of future returns" />
+        The club should carry them temporarily and recover the shortfall from their share of future returns.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q9 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 09</p>
+    <p class="question-text">What governance structure do you believe an investment club must have in place before accepting any member contributions?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q9" value="Signed membership agreement covering rights, contributions, exit conditions, and default consequences" required />
+        A signed membership agreement covering each member's rights, contribution terms, exit conditions, and consequences for default.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q9" value="Designated financial officer with transparent reporting, structure built as club grows" />
+        A designated financial officer with transparent reporting — structure can be built as the club grows.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q9" value="Trust and mutual agreement is enough — formal structure creates unnecessary friction" />
+        Trust and mutual agreement among members is enough — formal structure can create unnecessary friction between people who know each other.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q10 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 10</p>
+    <p class="question-text">How do you define a successful investment club experience beyond financial return?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q10" value="Financial return is the only measure — relationships and learning are secondary" required />
+        Financial return is the only measure — relationships and learning are secondary.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q10" value="Building relationships with aligned financial values and developing confidence to evaluate future opportunities" />
+        Building relationships with people whose financial values align with mine and developing the confidence to evaluate future opportunities independently.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q10" value="Both matter equally — financial returns and growth as an investor" />
+        Both matter equally — I want financial returns and I want to grow as an investor through the process.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q11 Multi-select ─────────────────────────────────── -->
+  <p class="section-label">Skills and expertise</p>
+
+  <div class="question-block">
+    <p class="question-number">Question 11 — Select all that apply</p>
+    <p class="question-text">Which of the following areas do you bring expertise, direct experience, or connections who could assist the club?</p>
+    <div class="options">
+      <label class="option-label"><input type="checkbox" name="q11" value="Taxation" /> Taxation</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Research and/or Business Development" /> Research and/or Business Development</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Business Operations" /> Business Operations</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Project Management" /> Project Management</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Auditing" /> Auditing</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Financial Projections" /> Financial Projections</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Law" /> Law</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Writing (proposals, emails, SOPs, meeting minutes, business documents)" /> Writing — including proposals, emails, SOPs, meeting minutes, and business documents such as reports</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Lender and Bank Relationships" /> Lender and Bank Relationships</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Accounting" /> Accounting</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Real Estate Investing and/or Development" /> Real Estate Investing and/or Development</label>
+      <label class="option-label"><input type="checkbox" name="q11" value="Wherever I can help" /> Wherever I can help</label>
+    </div>
+  </div>
+
+  <!-- ── Q12 ─────────────────────────────────── -->
+  <p class="section-label">Legal and financial risk</p>
+
+  <div class="question-block">
+    <p class="question-number">Question 12</p>
+    <p class="question-text">Would you be comfortable if a member's personal legal or financial troubles — including creditors, court judgments, or bankruptcy filings — could place a lien on that member's share of the investment club's assets, including their contributions and any returns generated on those contributions?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q12" value="No — operating agreement must legally ring-fence each member's contributions from personal creditors. Non-negotiable." required />
+        No — the club's operating agreement must legally ring-fence each member's contributions and returns from personal creditors, court judgments, and bankruptcy claims. This is a non-negotiable condition of my participation.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q12" value="Open to it, provided agreement includes forced buyout mechanism triggered by lien, judgment, or bankruptcy" />
+        I am open to it, provided the agreement includes a clearly defined forced buyout mechanism — so that any lien, judgment, or bankruptcy filing triggers an immediate process that protects the remaining members, the club's assets, and the integrity of all outstanding returns.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q12" value="Had not considered this risk — would need to consult legal counsel before taking a position" />
+        I had not considered this risk — I would need to consult legal counsel before taking a position on how it should be handled.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q13 Multi-select ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 13 — Select all that apply</p>
+    <p class="question-text">When a member of the investment club contributes their professional skills — such as legal review, financial projections, auditing, or project management — how should they be compensated?</p>
+    <div class="options">
+      <label class="option-label"><input type="checkbox" name="q13" value="Skill equity — value converted into additional units or higher profit share, documented before work begins" /> Skill equity — the agreed value of their service is converted into additional units or a higher profit share percentage, documented before the work begins</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="Fee credit — value of service counts toward next contribution installment" /> Fee credit — the value of the service rendered counts toward that member's next contribution installment, keeping cash inside the club</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="Reduced contribution threshold in exchange for committing skill for duration of project" /> Reduced contribution threshold — a member with a high-value skill commits that skill for the duration of the project in exchange for a lower cash contribution requirement</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="Priority return — skill contributors paid out first before general profit distribution" /> Priority return — skill contributors are paid out first from project returns before general profit distribution is made to all members</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="Named role with decision-making authority (e.g. Club Auditor, Legal Advisor), no cash cost" /> Named role with decision-making authority — a formal title such as Club Auditor or Legal Advisor with a seat in key decisions, at no cash cost to the club</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="Market-rate cash fees like external vendor — skills should not replace financial contributions" /> Members who provide services should be paid market-rate cash fees like any external vendor — skills should not replace financial contributions</label>
+      <label class="option-label"><input type="checkbox" name="q13" value="All skill-based compensation governed by formal service agreement regardless of form" /> All skill-based compensation should be governed by a formal service agreement between the member and the club — regardless of which form the compensation takes</label>
+    </div>
+  </div>
+
+  <!-- ── Q15 ─────────────────────────────────── -->
+  <p class="section-label">Commitment and exit policy</p>
+  <div class="question-block scenario">
+    <p class="question-number">Question 14 — Default consequences</p>
+    <p class="question-text">In the event a member defaults on their monthly contribution, the following escalating consequence structure has been proposed. Do you agree with this approach?</p>
+    <div class="scenario-box">
+      1st missed month: formal warning. End of 2nd month: second warning + 10% interest on total contributions owed. End of 3rd month: 25% interest on total contributions owed. End of 4th month: immediate removal, with remaining members collectively making up the shortfall to keep the project on track.
+    </div>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q14" value="Agree with full escalation structure including automatic removal and remaining members covering shortfall" required />
+        Yes — I agree with the full escalation structure including the warning steps, interest charges, and immediate removal at month four, with remaining members covering the shortfall to keep the project on track.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q14" value="Agree with warning and interest structure but removal should require full membership vote" />
+        I agree with the warning and interest structure but believe removal should be subject to a full membership vote rather than automatic — circumstances should be considered before a member is removed.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q14" value="Reservations — need remaining members' obligation to cover shortfall defined and capped in membership agreement" />
+        I have reservations — specifically about remaining members being required to cover the defaulting member's shortfall. I would need that obligation defined and capped in the membership agreement before I agree.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Q16 ─────────────────────────────────── -->
+  <div class="question-block">
+    <p class="question-number">Question 15</p>
+    <p class="question-text">The club proposes the following voluntary exit policy: a member becomes eligible to voluntarily exit only after completing 9 consecutive months of contributions with no missed or late payments. Only one voluntary exit is permitted within any 12-month period. Payout will be made less any applicable taxes and expenses. Do you agree with these conditions?</p>
+    <div class="options">
+      <label class="option-label">
+        <input type="radio" name="q15" value="Agree with both conditions — 9 months is fair threshold, one-exit rule protects club stability" required />
+        Yes — I agree with both conditions. Nine consecutive months of on-time contributions is a fair threshold to earn the right to exit, and limiting voluntary exits to once per 12-month period protects the club's financial stability and prevents members from cycling in and out at the club's expense.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q15" value="Agree with 9-month requirement but want one-exit rule to reset from date of previous exit, not fixed calendar window" />
+        I agree with the 9-month consecutive contribution requirement but would want the one-exit rule to reset from the date of the previous exit — not from a fixed 12-month calendar window — so the timeline is tied to member behavior, not the calendar.
+      </label>
+      <label class="option-label">
+        <input type="radio" name="q15" value="Reservations — need defined exception process for documented hardship where 9-month requirement can be waived by board approval" />
+        I have reservations — I would need the policy to include a defined exception process for documented hardship such as job loss, medical emergency, or relocation, where the 9-month requirement could be waived by board approval without classifying the exit as a default.
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Submit ─────────────────────────────────── -->
+  <div class="submit-area">
+    <button type="submit" class="submit-btn">Submit questionnaire</button>
+    <p class="disclaimer">Your responses will help the She Owns the Block team understand your readiness, risk profile, and expectations before any formal commitment is made.</p>
+  </div>
+
+</form>
+</div>
+
+</body>
+</html>
